@@ -83,9 +83,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   mesActivites.removeAt(i);
                 });
               },
-              child: new ListTile(
-                title: new Text("Activité:  ${activite.nom}"),
-                trailing: new Icon(activite.icone),
+              child: new Container(
+                height: 125.0,
+                padding: EdgeInsets.all(5.0),
+                child: new Card(
+                  elevation: 7.5,
+                  child: new Container(
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        new Icon(activite.icone, color: Colors.teal,size: 75,),
+                        new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 20),),
+                            new Text(activite.nom, style: new TextStyle(color: Colors.teal[700], fontSize: 30.0),)
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               )
           );
 
