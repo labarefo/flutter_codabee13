@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp
-  ]);
+
   runApp(MyApp());
 }
 
@@ -61,15 +58,40 @@ class _MyHomePageState extends State<MyHomePage> {
     print(orientation);
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
-        child: new ListView.builder(
-          itemCount: mesActivites.length,
+        child: new GridView.builder(
+            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemCount: mesActivites.length,
             itemBuilder: (context, i){
-            Activite activite = mesActivites[i];
-            var key = activite.nom;
+              return new Container(
+                margin: EdgeInsets.all(2.5),
+                child: new Card(
+                  elevation: 10,
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 15.0),),
+                      new Icon(mesActivites[i].icone, color: Colors.teal, size: 40.0,),
+                      new Text(mesActivites[i].nom, style: new TextStyle(color: Colors.teal, fontSize: 20.0, fontStyle: FontStyle.italic),)
+                    ],
+                  ),
+                ),
+              );
+            }
+        )
+      ),
+
+    );
+  }
+
+  Widget liste(){
+    return new ListView.builder(
+        itemCount: mesActivites.length,
+        itemBuilder: (context, i){
+          Activite activite = mesActivites[i];
+          var key = activite.nom;
           return new Dismissible(
               key: new Key(key),
               background: new Container(
@@ -93,35 +115,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 125.0,
                 padding: EdgeInsets.all(5.0),
                 child: new Card(
-                  elevation: 7.5,
-                  child: new InkWell(
-                    onTap: ()=> print("tapped ${activite.nom}"),
-                    onLongPress: ()=> print("onLongPress ${activite.nom}"),
-                    child:  new Container(
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          new Icon(activite.icone, color: Colors.teal,size: 75,),
-                          new Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 20),),
-                              new Text(activite.nom, style: new TextStyle(color: Colors.teal[700], fontSize: 30.0),)
-                            ],
-                          )
-                        ],
+                    elevation: 7.5,
+                    child: new InkWell(
+                      onTap: ()=> print("tapped ${activite.nom}"),
+                      onLongPress: ()=> print("onLongPress ${activite.nom}"),
+                      child:  new Container(
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            new Icon(activite.icone, color: Colors.teal,size: 75,),
+                            new Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 20),),
+                                new Text(activite.nom, style: new TextStyle(color: Colors.teal[700], fontSize: 30.0),)
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  )
+                    )
                 ),
               )
           );
 
-        }),
+        });
 
-      ),
-
-    );
   }
 }
 
