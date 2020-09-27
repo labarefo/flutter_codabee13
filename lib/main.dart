@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
   runApp(MyApp());
 }
 
@@ -52,7 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    Orientation orientation = MediaQuery.of(context).orientation;
+    print(orientation);
     return Scaffold(
       appBar: AppBar(
 
