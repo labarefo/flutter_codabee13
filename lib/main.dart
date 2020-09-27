@@ -88,21 +88,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(5.0),
                 child: new Card(
                   elevation: 7.5,
-                  child: new Container(
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        new Icon(activite.icone, color: Colors.teal,size: 75,),
-                        new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 20),),
-                            new Text(activite.nom, style: new TextStyle(color: Colors.teal[700], fontSize: 30.0),)
-                          ],
-                        )
-                      ],
+                  child: new InkWell(
+                    onTap: ()=> print("tapped ${activite.nom}"),
+                    onLongPress: ()=> print("onLongPress ${activite.nom}"),
+                    child:  new Container(
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          new Icon(activite.icone, color: Colors.teal,size: 75,),
+                          new Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 20),),
+                              new Text(activite.nom, style: new TextStyle(color: Colors.teal[700], fontSize: 30.0),)
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                  )
                 ),
               )
           );
