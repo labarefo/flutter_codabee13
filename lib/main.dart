@@ -61,28 +61,36 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: new GridView.builder(
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-            itemCount: mesActivites.length,
-            itemBuilder: (context, i){
-              return new Container(
-                margin: EdgeInsets.all(2.5),
-                child: new Card(
-                  elevation: 10,
-                  child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 15.0),),
-                      new Icon(mesActivites[i].icone, color: Colors.teal, size: 40.0,),
-                      new Text(mesActivites[i].nom, style: new TextStyle(color: Colors.teal, fontSize: 20.0, fontStyle: FontStyle.italic),)
-                    ],
-                  ),
-                ),
-              );
-            }
-        )
+        child: orientation == Orientation.portrait ? liste() : grille()
       ),
 
+    );
+  }
+
+  Widget grille(){
+    return new GridView.builder(
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+        itemCount: mesActivites.length,
+        itemBuilder: (context, i){
+          return new Container(
+            margin: EdgeInsets.all(2.5),
+            child: new Card(
+              elevation: 10,
+              child: new InkWell(
+                onTap: () => print("tape grille"),
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    new Text("Activite: ", style: new TextStyle(color: Colors.teal, fontSize: 15.0),),
+                    new Icon(mesActivites[i].icone, color: Colors.teal, size: 40.0,),
+                    new Text(mesActivites[i].nom, style: new TextStyle(color: Colors.teal, fontSize: 20.0, fontStyle: FontStyle.italic),)
+                  ],
+                ),
+              )
+
+            ),
+          );
+        }
     );
   }
 
